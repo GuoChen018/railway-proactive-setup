@@ -311,19 +311,19 @@ export const MatrixTrainClean = makeMatrix(TN, TN + 6, 140, (f, r, c) => {
   return DIM;
 });
 
-// L3. Train on track — square 7×7 grid, stable bottom rail. A 13-wide train
-// sprite (reconstructed from the reference keyframes) slides one column per
-// frame: empty → enters from the left → crosses → exits right → empty → loop.
-// sl = sprite-local column (0..12).
+// L3. Train on track — square 7×7 grid, stable bottom rail. A train sprite
+// slides one column per frame: empty → enters from the left → crosses →
+// exits right → empty → loop. sl = sprite-local column (0..TRAIN_BODY_W-1).
+const TRAIN_BODY_W = 11; // train length (shorter = tighter middle)
 function trainCell(r: number, sl: number): boolean {
-  if (sl < 0 || sl > 12) return false;
-  if (r === 1) return sl >= 2 && sl <= 10; // roof
-  if (r === 2) return sl === 1 || sl === 11; // chimney bump at each end
-  if (r === 3 || r === 4) return true; // body (full length)
+  if (sl < 0 || sl > TRAIN_BODY_W - 1) return false;
+  if (r === 1) return sl >= 2 && sl <= TRAIN_BODY_W - 3; // roof
+  if (r === 2) return sl === 1 || sl === TRAIN_BODY_W - 2; // chimney each end
+  if (r === 3 || r === 4) return true; // body
   return false;
 }
-const TRAIN_X_MIN = -13; // fully off the left → nothing
-const TRAIN_NFRAMES = 21; // X from -13..7 (X=7 is fully off the right)
+const TRAIN_X_MIN = -TRAIN_BODY_W; // fully off the left → nothing
+const TRAIN_NFRAMES = TN + TRAIN_BODY_W + 1; // X from -BODY_W..TN
 export const MatrixTrainTrack = makeMatrix(TN, TRAIN_NFRAMES, 90, (f, r, c) => {
   if (r === TN - 1) return 0.9; // stable track line along the bottom
   return trainCell(r, c - (TRAIN_X_MIN + f)) ? 1 : DIM;

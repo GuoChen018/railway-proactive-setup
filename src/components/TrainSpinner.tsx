@@ -9,17 +9,18 @@ import { useEffect, useState } from "react";
 const N = 7; // square grid
 const DIM = 0.16;
 
-// 13-wide train sprite. sl = sprite-local column (0..12).
+// Train sprite. sl = sprite-local column (0..BODY_W-1).
+const BODY_W = 11; // train length (shorter = tighter middle)
 function trainCell(r: number, sl: number): boolean {
-  if (sl < 0 || sl > 12) return false;
-  if (r === 1) return sl >= 2 && sl <= 10; // roof
-  if (r === 2) return sl === 1 || sl === 11; // chimney bump at each end
+  if (sl < 0 || sl > BODY_W - 1) return false;
+  if (r === 1) return sl >= 2 && sl <= BODY_W - 3; // roof
+  if (r === 2) return sl === 1 || sl === BODY_W - 2; // chimney bump at each end
   if (r === 3 || r === 4) return true; // body (full length)
   return false;
 }
 
-const X_MIN = -13; // fully off the left → nothing
-const NFRAMES = 21; // X from -13..7 (X=7 is fully off the right)
+const X_MIN = -BODY_W; // fully off the left → nothing
+const NFRAMES = N + BODY_W + 1; // X from -BODY_W..N
 
 interface Props {
   size?: number;
