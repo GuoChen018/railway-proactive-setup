@@ -8,7 +8,6 @@ import { PaletteShell } from "./components/PaletteShell";
 import { ServiceNode } from "./components/ServiceNode";
 import { DeployPanel, type Service } from "./components/DeployPanel";
 import { ToastStack } from "./components/ToastStack";
-import { OSNotification } from "./components/OSNotification";
 import { EmptyBackground } from "./components/EmptyBackground";
 import { GitHubIcon, PlusIcon, PostgresLogo } from "./components/icons";
 import { TrainSpinner } from "./components/TrainSpinner";
@@ -131,10 +130,6 @@ export default function App() {
         onDismissSetup={flow.dismissSetupToast}
         onDismissLive={flow.dismissLiveToast}
       />
-
-      {s.osNotification && (
-        <OSNotification onDone={flow.dismissOsNotification} />
-      )}
     </div>
   );
 }
