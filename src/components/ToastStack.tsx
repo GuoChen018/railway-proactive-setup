@@ -24,7 +24,7 @@ export function ToastStack({
       {showSetup && (
         <div className="toast">
           <div className="toast-content">
-            <div className="toast-title">Setting up your project</div>
+            <div className="toast-title">Get notified when complete</div>
             <div className="toast-body">
               This can take a few minutes. Turn on browser notifications to know
               the moment it's ready.
@@ -42,7 +42,7 @@ export function ToastStack({
               ) : (
                 <>
                   <BellIcon size={14} />
-                  Enable browser notifications
+                  Enable notifications
                 </>
               )}
             </button>

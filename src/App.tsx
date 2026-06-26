@@ -10,7 +10,8 @@ import { DeployPanel, type Service } from "./components/DeployPanel";
 import { ToastStack } from "./components/ToastStack";
 import { OSNotification } from "./components/OSNotification";
 import { EmptyBackground } from "./components/EmptyBackground";
-import { GitHubIcon, PlusIcon, PostgresLogo, Spinner } from "./components/icons";
+import { GitHubIcon, PlusIcon, PostgresLogo } from "./components/icons";
+import { TrainSpinner } from "./components/TrainSpinner";
 import { fmt, REPO, type RepoStatus } from "./flow/flow";
 import { useFlow } from "./flow/useFlow";
 import "./App.css";
@@ -155,7 +156,7 @@ function backendStatus(status: RepoStatus, elapsed: number) {
       : `Deploying (${fmt(elapsed)})`;
   return (
     <span className="status-line">
-      <Spinner size={15} />
+      <TrainSpinner size={18} className="train-spinner" />
       {label}
     </span>
   );
@@ -172,7 +173,7 @@ function childStatus(live: boolean) {
   }
   return (
     <span className="status-line">
-      <Spinner size={15} />
+      <TrainSpinner size={18} className="train-spinner" />
       Deploying
     </span>
   );

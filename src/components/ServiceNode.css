@@ -134,7 +134,8 @@
   gap: 9px;
   color: var(--text-muted);
 }
-.status-line .spinner {
+.status-line .spinner,
+.status-line .train-spinner {
   color: var(--text-secondary);
 }
 .status-dot {

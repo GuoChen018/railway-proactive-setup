@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import { useEffect, useState, type SVGProps } from "react";
 import postgresPng from "../assets/postgres.png";
 import railwayLogoPng from "../assets/railway-logo.png";
 
@@ -547,19 +547,42 @@ export function RedoIcon({ size = 16, ...p }: IconProps) {
   );
 }
 
-export function Spinner({ size = 16, ...p }: IconProps) {
+const BRAILLE_FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+export function Spinner({
+  size = 16,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
+  const [frame, setFrame] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setFrame((f) => (f + 1) % BRAILLE_FRAMES.length),
+      80
+    );
+    return () => window.clearInterval(id);
+  }, []);
   return (
-    <svg {...base(size)} {...p} className={`spinner ${p.className || ""}`}>
-      <circle
-        cx="12"
-        cy="12"
-        r="8.5"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeDasharray="40 18"
-        opacity="0.9"
-      />
-    </svg>
+    <span
+      className={`spinner-braille ${className}`}
+      aria-label="Loading"
+      role="status"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: size,
+        height: size,
+        fontSize: size * 1.15,
+        lineHeight: 1,
+        color: "currentColor",
+        fontFamily:
+          "var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+      }}
+    >
+      {BRAILLE_FRAMES[frame]}
+    </span>
   );
 }
