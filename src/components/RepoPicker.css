@@ -1,0 +1,129 @@
+.repo-picker {
+  width: 430px;
+}
+
+.repo-search-field {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #181622;
+  border-radius: 8px;
+  padding: 0 6px 0 4px;
+}
+.repo-search-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 8px;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+}
+.repo-search-field input::placeholder {
+  color: #6c6b7b;
+}
+.repo-back {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: var(--text-secondary);
+  flex: 0 0 auto;
+}
+.repo-back:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.repo-config-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+.repo-config-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.repo-refresh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+}
+.repo-refresh:hover {
+  color: var(--text);
+}
+
+.repo-list {
+  padding: 2px 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.repo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  transition: background 0.12s, color 0.12s, opacity 0.3s;
+}
+.repo-row-icon {
+  color: var(--text-secondary);
+  display: flex;
+}
+.repo-row-label {
+  flex: 1;
+}
+.repo-row-chevron {
+  color: var(--text-faint);
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.repo-row:hover,
+.repo-row.active {
+  background: var(--row-hover);
+  color: var(--text);
+}
+.repo-row:hover .repo-row-chevron,
+.repo-row.active .repo-row-chevron {
+  opacity: 1;
+}
+
+/* once daybook is chosen, the others fade like in the reference */
+.repo-row.dimmed {
+  color: var(--text-faint);
+  cursor: default;
+}
+.repo-row.dimmed:hover {
+  background: transparent;
+  color: var(--text-faint);
+}
+.repo-row.dimmed:hover .repo-row-chevron {
+  opacity: 0;
+}
+.repo-row.selecting {
+  background: var(--node-bg);
+  color: var(--text-muted);
+  cursor: default;
+}
+.repo-row-spinner {
+  color: var(--text-muted);
+}

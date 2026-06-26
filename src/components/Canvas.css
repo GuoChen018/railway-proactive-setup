@@ -1,0 +1,65 @@
+.canvas {
+  position: absolute;
+  inset: 8px;
+  overflow: hidden;
+  background: #0b0a11;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  touch-action: none;
+  cursor: grab;
+}
+.canvas:active {
+  cursor: grabbing;
+}
+
+.canvas-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--canvas-dot) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.canvas-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  z-index: 2;
+}
+
+.canvas-overlay-anchor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.node-slot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  z-index: 2;
+}
+.node-slot:active {
+  cursor: grabbing;
+}
+
+.conn-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.conn-path.drawn {
+  animation: draw-line 0.6s ease forwards;
+}
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

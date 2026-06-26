@@ -1,0 +1,150 @@
+.node {
+  width: 234px;
+  background: var(--node-bg);
+  border: 1px solid var(--node-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-node);
+  user-select: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.node-resolved {
+  cursor: pointer;
+  animation: node-resolve 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.node-resolved:hover {
+  border-color: #3a3645;
+  background: var(--node-bg-hover);
+}
+.node-selected,
+.node-selected:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-node), 0 0 0 1px var(--accent-border),
+    0 0 28px rgba(154, 107, 245, 0.16);
+}
+
+/* ghost / pending */
+.node-ghost {
+  border-style: dashed;
+  border-color: #38343f;
+  background: rgba(28, 26, 36, 0.5);
+  box-shadow: none;
+  animation: ghost-breathe 1.8s ease-in-out infinite, ghost-in 0.5s ease both;
+}
+
+@keyframes ghost-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes ghost-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+@keyframes node-resolve {
+  0% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.node-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 16px;
+}
+.node-icon {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+.node-ghost .node-icon {
+  color: var(--text-muted);
+}
+.node-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+.node-ghost .node-title {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.node-domain {
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  animation: domain-pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes domain-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.node-divider {
+  height: 1px;
+  background: var(--node-border);
+  margin: 0 0;
+}
+.node-ghost .node-divider {
+  background: #2a2733;
+}
+
+.node-status {
+  padding: 13px 16px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.node-reason {
+  font-size: 12px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* status row helpers (used by parent) */
+.status-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-muted);
+}
+.status-line .spinner {
+  color: var(--text-secondary);
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(65, 211, 146, 0.6);
+}
+.status-online {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
